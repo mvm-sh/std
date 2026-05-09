@@ -1,0 +1,3 @@
+# pull_test.go covers Pull/Pull2 only; both are removed in iter.go,
+# so the test would not compile.
+pull_test.go
