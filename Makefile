@@ -22,7 +22,9 @@ PACKAGES := \
 	maps \
 	slices \
 	errors \
-	path
+	path \
+	log \
+	log/internal
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 

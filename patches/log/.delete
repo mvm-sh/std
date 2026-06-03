@@ -1,0 +1,8 @@
+# mvm's test loader returns a single compilation unit, so for a package with
+# both internal (package log) and external (package log_test) test files it
+# keeps the internal ones and drops the external. log's examples
+# (ExampleLogger, ExampleLogger_Output) live in the external example_test.go and
+# exercise log's runtime.Caller-derived file:line -- the reason log is
+# interpreted at all -- so drop the internal log_test.go to let the examples run
+# (matching the historical bridged behavior, which served only external tests).
+log_test.go
