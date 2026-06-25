@@ -56,6 +56,26 @@ PACKAGES := \
 	unique \
 	net/netip \
 	net/url \
+	regexp \
+	regexp/syntax \
+	text/scanner \
+	text/tabwriter \
+	html \
+	html/template \
+	mime \
+	mime/quotedprintable \
+	internal/gover \
+	go/token \
+	go/version \
+	go/build/constraint \
+	go/doc/comment \
+	go/internal/scannerhooks \
+	go/scanner \
+	go/ast \
+	go/parser \
+	go/constant \
+	go/printer \
+	go/format \
 	container/heap \
 	container/list \
 	container/ring \
