@@ -59,7 +59,9 @@ PACKAGES := \
 	container/heap \
 	container/list \
 	container/ring \
-	flag
+	flag \
+	text/template \
+	text/template/parse
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 
