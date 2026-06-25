@@ -1,0 +1,18 @@
+# Upstream bytealg is asm + internal/cpu + runtime-linkname backed; replaced wholesale by the pure-Go bytealg.go overlay.
+bytealg.go
+compare_generic.go
+compare_native.go
+count_generic.go
+count_native.go
+equal_generic.go
+equal_native.go
+index_amd64.go
+index_arm64.go
+index_generic.go
+index_loong64.go
+index_native.go
+index_ppc64x.go
+index_s390x.go
+indexbyte_generic.go
+indexbyte_native.go
+lastindexbyte_generic.go

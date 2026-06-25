@@ -7,15 +7,10 @@
 GOROOT ?= $(shell go env GOROOT)
 GOSRC  := $(GOROOT)/src
 
-# Curated list of stdlib packages mvm interprets from source. This list
-# is deliberately partial -- performance-critical or hard-to-interpret
-# packages (fmt, runtime, reflect, sync, time, crypto/* with asm fast
-# paths, etc.) stay as native bridges in mvm and are intentionally
-# omitted here. Add a package by appending a line and running `make
-# update`; remove by deleting both the line and its directory.
-# Subdirectories of upstream packages are NOT copied automatically --
-# list each one explicitly (e.g. "path" and "path/filepath" as separate
-# entries).
+# Stdlib packages mvm interprets from source. Native still bridges these (the
+# bridge wins); they are mirrored so the wasm floor can interpret dispatchers
+# (fmt, ...) instead of trapping. Add a line and run `make update`. List each
+# subdirectory explicitly (e.g. "path/filepath", "internal/fmtsort").
 PACKAGES := \
 	cmp \
 	iter \
@@ -24,7 +19,47 @@ PACKAGES := \
 	errors \
 	path \
 	log \
-	log/internal
+	log/internal \
+	fmt \
+	internal/fmtsort \
+	internal/stringslite \
+	strconv \
+	internal/strconv \
+	strings \
+	bytes \
+	bufio \
+	sort \
+	unicode \
+	unicode/utf8 \
+	unicode/utf16 \
+	internal/bytealg \
+	internal/byteorder \
+	internal/godebug \
+	io \
+	io/fs \
+	context \
+	internal/oserror \
+	internal/saferio \
+	internal/singleflight \
+	internal/nettrace \
+	encoding \
+	encoding/csv \
+	encoding/json \
+	encoding/binary \
+	encoding/hex \
+	encoding/base32 \
+	encoding/base64 \
+	encoding/pem \
+	encoding/asn1 \
+	encoding/gob \
+	encoding/xml \
+	unique \
+	net/netip \
+	net/url \
+	container/heap \
+	container/list \
+	container/ring \
+	flag
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 

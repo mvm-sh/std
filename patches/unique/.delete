@@ -1,0 +1,6 @@
+# Upstream unique interns via internal/abi + weak pointers + runtime cleanup,
+# none interpretable on the wasm floor. Replaced by the map-based overlay below.
+canonmap.go
+clone.go
+doc.go
+handle.go
