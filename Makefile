@@ -103,6 +103,14 @@ PACKAGES := \
 	compress/lzw \
 	archive/tar \
 	archive/zip \
+	image \
+	image/color \
+	image/color/palette \
+	image/internal/imageutil \
+	image/draw \
+	image/png \
+	image/jpeg \
+	image/gif \
 	flag \
 	text/template \
 	text/template/parse \
