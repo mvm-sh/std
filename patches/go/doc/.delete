@@ -1,0 +1,4 @@
+# headscan is a //go:build ignore command (package main) that self-imports
+# go/doc; it is a dev tool, not part of the library. Drop it so the interpreted
+# package has no stray main file.
+headscan.go

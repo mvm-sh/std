@@ -1,0 +1,3 @@
+# gen.go is a //go:build ignore command (package main) that regenerates sais2.go
+# from sais.go. It is a dev tool, not part of the library; drop it.
+gen.go

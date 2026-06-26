@@ -56,6 +56,8 @@ PACKAGES := \
 	unique \
 	net/netip \
 	net/url \
+	net/textproto \
+	net/mail \
 	regexp \
 	regexp/syntax \
 	text/scanner \
@@ -64,10 +66,13 @@ PACKAGES := \
 	html/template \
 	mime \
 	mime/quotedprintable \
+	mime/multipart \
 	internal/gover \
+	internal/lazyregexp \
 	go/token \
 	go/version \
 	go/build/constraint \
+	go/doc \
 	go/doc/comment \
 	go/internal/scannerhooks \
 	go/scanner \
@@ -79,9 +84,19 @@ PACKAGES := \
 	container/heap \
 	container/list \
 	container/ring \
+	index/suffixarray \
+	compress/flate \
+	compress/gzip \
+	compress/zlib \
+	compress/bzip2 \
+	compress/lzw \
+	archive/tar \
+	archive/zip \
 	flag \
 	text/template \
-	text/template/parse
+	text/template/parse \
+	database/sql \
+	database/sql/driver
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 
