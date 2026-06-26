@@ -31,6 +31,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"net"
 )
 
 // An Error represents a numeric error response from a server.
@@ -75,6 +76,16 @@ func NewConn(conn io.ReadWriteCloser) *Conn {
 // Close closes the connection.
 func (c *Conn) Close() error {
 	return c.conn.Close()
+}
+
+// Dial connects to the given address on the given network using [net.Dial]
+// and then returns a new [Conn] for the connection.
+func Dial(network, addr string) (*Conn, error) {
+	c, err := net.Dial(network, addr)
+	if err != nil {
+		return nil, err
+	}
+	return NewConn(c), nil
 }
 
 // Cmd is a convenience method that sends a command after

@@ -1,0 +1,7 @@
+# HTTP/1.1 only: drop the bundled HTTP/2 stack and its error file; omithttp2.go
+# (untagged below) supplies the http2* stubs the rest of the package references.
+# Dropping h2_bundle.go also removes the golang.org/x/net/http2/hpack dependency.
+h2_bundle.go
+h2_error.go
+# Build-ignored standalone demo (package main), not part of the package.
+triv.go

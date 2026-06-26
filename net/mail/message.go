@@ -24,7 +24,7 @@ import (
 	"io"
 	"log"
 	"mime"
-	"net/netip"
+	"net"
 	"net/textproto"
 	"strings"
 	"sync"
@@ -763,10 +763,8 @@ func (p *addrParser) consumeDomainLiteral() (string, error) {
 		return "", errors.New("mail: unclosed domain-literal")
 	}
 
-	// Check if the domain literal is an IP address. mvm: net is absent on the
-	// wasm mirror, so validate via net/netip; net.ParseIP is netip.ParseAddr
-	// rejecting a zone.
-	if addr, err := netip.ParseAddr(dtext); err != nil || addr.Zone() != "" {
+	// Check if the domain literal is an IP address
+	if net.ParseIP(dtext) == nil {
 		return "", fmt.Errorf("mail: invalid IP address in domain-literal: %q", dtext)
 	}
 

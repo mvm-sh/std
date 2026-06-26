@@ -7,10 +7,11 @@
 GOROOT ?= $(shell go env GOROOT)
 GOSRC  := $(GOROOT)/src
 
-# Stdlib packages mvm interprets from source. Native still bridges these (the
-# bridge wins); they are mirrored so the wasm floor can interpret dispatchers
-# (fmt, ...) instead of trapping. Add a line and run `make update`. List each
-# subdirectory explicitly (e.g. "path/filepath", "internal/fmtsort").
+all: update
+
+# Stdlib packages mvm interprets from source.
+# Native still bridges these (the bridge wins); they are mirrored
+# so the wasm floor can interpret dispatchers instead of trapping.
 PACKAGES := \
 	cmp \
 	iter \
@@ -58,6 +59,11 @@ PACKAGES := \
 	net/url \
 	net/textproto \
 	net/mail \
+	net/http \
+	net/http/internal \
+	net/http/internal/ascii \
+	net/http/internal/httpcommon \
+	net/http/httptrace \
 	regexp \
 	regexp/syntax \
 	text/scanner \
@@ -100,16 +106,9 @@ PACKAGES := \
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 
-all: update
-
 update: go.mod info $(PACKAGES) LICENSE
 	@echo "synced $(words $(PACKAGES)) packages from $(GOROOT)"
 
-# Per-package rule: wipe the destination, recreate it, copy top-level
-# .go files (including *_test.go so mvm's test runner can exercise them),
-# then layer any mvm-specific overrides from patches/<pkg>/. Upstream
-# subdirectories such as testdata/ and internal/ are intentionally
-# excluded; vendor them explicitly if needed.
 $(PACKAGES):
 	@echo "  $@"
 	@rm -rf ./$@
@@ -117,11 +116,6 @@ $(PACKAGES):
 	@cp $(GOSRC)/$@/*.go ./$@/
 	@$(MAKE) --no-print-directory apply-patches PKG=$@
 
-# Apply patches/$(PKG)/ overlays to ./$(PKG)/. The .delete list runs
-# first (so a deleted file can be re-added by an overlay below), then
-# every *.go file under patches/$(PKG)/ is copied on top, replacing or
-# adding files in the synced tree. NOTES.md and .delete are not copied.
-# This step is a no-op for packages without a patches/<pkg>/ directory.
 apply-patches:
 	@if [ -f patches/$(PKG)/.delete ]; then \
 	  grep -v '^[[:space:]]*\(#\|$$\)' patches/$(PKG)/.delete | \
@@ -131,9 +125,6 @@ apply-patches:
 	  find patches/$(PKG) -maxdepth 1 -name '*.go' -exec cp {} ./$(PKG)/ \; ; \
 	fi
 
-# Show every mvm-specific delta against a fresh upstream sync. Useful
-# after `make update` (especially after a Go upgrade) to confirm patches
-# still apply meaningfully and no unintended drift slipped in.
 diff-upstream:
 	@tmp=$$(mktemp -d) ; trap "rm -rf $$tmp" EXIT ; \
 	for p in $(PACKAGES); do \
