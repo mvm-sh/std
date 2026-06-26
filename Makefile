@@ -21,6 +21,9 @@ PACKAGES := \
 	path \
 	log \
 	log/internal \
+	log/slog \
+	log/slog/internal \
+	log/slog/internal/buffer \
 	fmt \
 	internal/fmtsort \
 	internal/stringslite \
