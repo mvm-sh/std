@@ -38,12 +38,14 @@ PACKAGES := \
 	internal/godebug \
 	io \
 	io/fs \
+	io/ioutil \
 	context \
 	internal/oserror \
 	internal/saferio \
 	internal/singleflight \
 	internal/nettrace \
 	encoding \
+	encoding/ascii85 \
 	encoding/csv \
 	encoding/json \
 	encoding/binary \
