@@ -117,7 +117,9 @@ PACKAGES := \
 	text/template \
 	text/template/parse \
 	database/sql \
-	database/sql/driver
+	database/sql/driver \
+	testing/iotest \
+	testing/fstest
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 
