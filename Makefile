@@ -92,6 +92,8 @@ PACKAGES := \
 	go/constant \
 	go/printer \
 	go/format \
+	internal/types/errors \
+	go/types \
 	container/heap \
 	container/list \
 	container/ring \
