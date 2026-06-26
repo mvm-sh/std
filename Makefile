@@ -119,7 +119,8 @@ PACKAGES := \
 	database/sql \
 	database/sql/driver \
 	testing/iotest \
-	testing/fstest
+	testing/fstest \
+	expvar
 
 .PHONY: all update clean info diff-upstream apply-patches LICENSE $(PACKAGES)
 
